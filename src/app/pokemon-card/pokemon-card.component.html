@@ -1,16 +1,52 @@
-<div class="pokemon-card">
+<div class="pokemon-card" *ngIf="pokemon">
     <div class="pokemon-card__image">
-        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png" alt="Pokemon Image">
+        <a data-toggle="modal" data-target="#ModalPokemon">
+            <img [src]="getPokemonImage(pokemon)" alt="Pokemon Image">
+        </a>
     </div>
     <div class="pokemon-card__number">
-        N° 001
+        N° {{ pokemon.number}}
     </div>
     <div class="pokemon-card__name">
-        Bulbassaur
+        {{ pokemon.name}}
     </div>
     <div class="pokemon-card__types">
-        <div class="pokemon-card__type pokemon-card__type--grass">Grass</div>
-        <div class="pokemon-card__type pokemon-card__type--poison">Poison</div>
-
+        <div class="pokemon-card__type" *ngFor="let type of pokemon.types" [class]="'pokemon-card__type--' + type.toLowerCase()">
+            {{ type }}
+        </div>
+    </div>
+    <!-- <div class="pokemon-card__types">
+        <div class="pokemon-card__type" *ngFor="let abilitie of pokemon.abilities" [class]="'pokemon-card__type--' + abilitie.toLowerCase()">
+            {{ abilitie }}
+        </div>
+    </div> -->
+    <!-- Modal -->
+    <div class="modal fade" id="ModalPokemon" tabindex="-1" role="dialog" aria-labelledby="ModalPokemon" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"> Informações do {{ pokemon.name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="pokemon-card__image">
+                        <a data-toggle="modal" data-target="#ModalPokemon">
+                            <img [src]="getPokemonImage(pokemon)" alt="Pokemon Image">
+                        </a>
+                    </div>
+                    <div class="pokemon-card">
+                        <p>Habilidades</p>
+                        <div class="pokemon-card" *ngFor="let abilitie of pokemon.abilities" [class]="'pokemon-card__type--' + abilitie.toLowerCase()">
+                            {{ abilitie }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
